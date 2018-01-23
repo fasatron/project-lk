@@ -1,0 +1,17 @@
+extends ../_layout
+
+include ../_mixins/user-card
+
+block content
+  .container
+    .row
+        .panel.panel-default.user_panel
+        .panel-heading
+            h3.panel-title Менторы
+        .panel-body
+          if users.length
+            .col-xs-12.col-md-9
+              for user in users
+                +user-card(user)
+          else
+            p Пользователи не найдены

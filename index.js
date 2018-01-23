@@ -2,21 +2,26 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 
-const mainRouter = require('./routers/main');
-const adminRouter = require('./routers/admin');
-
+const routers = require('./routers')
+const { error } = require('./middleware');
 const config = require('./config');
 
-const port = config.port || 3000;
-const host = config.host || '127.0.0.1'
-
+const { paths, port } = config
 const server = express();
 
-server.use(express.static(path.join(__dirname, 'public')));
+server.set('view engine', 'pug');
+server.set('views', paths.views);
 
+server.use(express.static(paths.public));
 server.use(logger('dev'));
 
-server.use('/', mainRouter);
-server.use('/admin', adminRouter);
+server.use('/', routers.main);
+server.use('/admin', routers.admin);
+server.use('/users', routers.user);
+server.use('/auth', routers.auth);
 
-server.listen(port, host, () => console.info('Server running on port', port));
+server.use(error.notFound);
+server.use(server.get('env') === 'development' ? error.development : error.production);
+
+
+server.listen(port, () => console.info('Server running on port', port));

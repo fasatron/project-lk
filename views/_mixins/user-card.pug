@@ -1,0 +1,52 @@
+mixin user-card(user)
+  .mentor
+    .row-fluid.mentor-item-row
+      .col-xs-3.text-center.mentor-info
+        div
+          img.img-circle.headImg(alt='Avatar' src=user.avatar)
+        .rate
+          strong= `${$} ${user.rate}`
+          small /15min
+          a.btn.btn-success.messageBtn(href=`${user.first_name} ${user.last_name}`) View Profile       
+      .col-xs-9.mentor-details
+        a.name(href=`users/${user.id}`)= `${user.first_name} ${user.last_name}`
+        span.ratingNum= user.rating
+        .rating
+          - for (let x = 0; x < user.rating; x++)
+              span  ★
+        .about= user.about
+        .expertise
+          .badge.customizeBadge
+            a.removeDec(href='/javascript-experts')
+              em JavaScript
+          .badge.customizeBadge
+            a.removeDec(href='/html_css-experts')
+              | HTML/CSS
+          .badge.customizeBadge
+            a.removeDec(href='/nodejs-experts')
+              | Node.js
+          .badge.customizeBadge
+            a.removeDec(href='/jquery-experts')
+              | jQuery
+          .badge.customizeBadge
+            a.removeDec(href='/git-experts')
+              | Git
+          .badge.customizeBadge
+            a.removeDec(href='/mongodb-experts')
+              | MongoDB
+          .badge.customizeBadge
+            a.removeDec(href='/html-experts')
+              | Html
+          .badge.customizeBadge
+            a.removeDec(href='/css-experts')
+              | CSS
+          .badge.customizeBadge
+            a.removeDec(href='/security-experts')
+              | Security
+          .badge.customizeBadge
+            a.removeDec(href='/shell-experts')
+              | Shell
+          .badge.customizeBadge
+            a.removeDec(href='/vim-experts')
+              | Vim
+
