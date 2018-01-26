@@ -14,12 +14,15 @@
     "bootstrap-sass": "^3.3.7",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "express-robots": "^0.1.6",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
+    "mongoose": "^5.0.1",
     "morgan": "^1.9.0",
-    "pug": "^2.0.0-rc.4"
+    "pug": "^2.0.0-rc.4",
+    "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
     "nodemon": "^1.13.3"
