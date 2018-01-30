@@ -1,8 +1,17 @@
 const { Router } = require('express');
 
 const router = Router();
-const { user: { showUsers } } = require('../controllers')
+const {
+  user: { showUsers, showUsersBySkill },
+  skill: { findSkills },
+} = require('../controllers');
 
-router.get('/', showUsers);
+router.get('/', findSkills, (req, res, next) => {
+  if (req.query.skill) {
+    showUsersBySkill(req, res, next);
+  } else {
+    showUsers(req, res, next);
+  }
+});
 
 module.exports = router;

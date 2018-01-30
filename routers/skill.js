@@ -1,9 +1,6 @@
 const { Router } = require('express');
 
 const router = Router();
-
-const { main: { showMain } } = require('../controllers');
-
-router.get('/', showMain);
+const { skill: { showUsersBySkill } } = require('../controllers');
 
 module.exports = router;
