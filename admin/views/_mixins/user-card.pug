@@ -8,7 +8,7 @@ mixin user-card(user)
           strong= `$ ${user.rate}`
           small / hour
           br
-          a.btn.btn-success.messageBtn(href=`/admin/users/${user.id}/update`) Edit Profile       
+          a.btn.btn-success.messageBtn(href=`/admin/users/${user.id}/update`) View Profile       
       .col-xs-9.mentor-details
         a.name(href=`/admin/users/${user.id}/update`)= user.full_name
         span.ratingNum= user.rating
