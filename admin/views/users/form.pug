@@ -22,8 +22,13 @@ block content
       select#skills-field.form-control(multiple name='skills')
         for skill in skills
           option(value=skill.id selected=user.skills.find(userSkill => userSkill.id === skill.id))= skill.title
-    button.btn.btn-primary(type='submit') Save
-    span &nbsp;&nbsp;
-    a.btn.btn-danger(href=`/admin/users/${user.id}/delete`) Delete
     .form-group
-      input#rating-field(type="number" name="rating" min=0 max=5 value=user.rating)
+      label(for='rating-field') Rating  
+      input#rating-field.form-control(type="number" name="rating" min=0 max=5 value=user.rating)
+    .form-group
+      label(for='rate-field') Rate
+      input#rate-field.form-control(type="number" name="rate" min=0 value=user.rate)      
+    span &nbsp;&nbsp; 
+    button.btn.btn-primary(type='submit') Save    
+    span &nbsp;&nbsp;          
+    a.btn.btn-danger(href=`/admin/users/${user.id}/delete`) Delete
