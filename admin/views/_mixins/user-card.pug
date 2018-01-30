@@ -1,0 +1,23 @@
+mixin user-card(user)
+  .mentor
+    .row.mentor-item-row
+      .col-xs-3.text-center.mentor-info
+        div
+          img.img-circle.headImg(alt='Avatar' src=user.avatar)
+        .rate
+          strong= `$ ${user.rate}`
+          small / hour
+          br
+          a.btn.btn-success.messageBtn(href=user.profile_url) View Profile       
+      .col-xs-9.mentor-details
+        a.name(href=`/admin/users/${user.id}/update`)= user.full_name
+        span.ratingNum= user.rating
+        .rating
+          - for (let x = 0; x < user.rating; x++)
+              span  ★
+        .about= user.about
+        .expertise
+          for skill in user.skills
+            .badge.customizeBadge
+              a.removeDec(href=`/users?skill=${skill.id}`)= skill.title
+            span &nbsp;

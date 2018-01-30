@@ -1,0 +1,19 @@
+extends /_layout
+
+include ../_mixins/user-card
+
+block content
+  .container
+    .row
+      include /_includes/sidebar
+      .col-xs-6.col-sm-9
+        .panel.panel-default.user_panel
+        .panel-heading
+            h3.panel-title= title
+        .panel-body
+          if users.length
+            .col-xs-12.col-md-9
+              for user in users
+                +user-card(user)
+          else
+            p No results found   

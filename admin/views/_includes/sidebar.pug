@@ -1,0 +1,5 @@
+aside.col-xs-6.col-sm-3
+  ul.list-group
+    for skill in skills
+      li.list-group-item
+        a(href=`/admin/skills/${skill.id}/update`)= skill.title

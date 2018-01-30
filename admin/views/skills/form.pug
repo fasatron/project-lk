@@ -1,0 +1,22 @@
+extends /_layout
+
+
+block content
+  .container
+    form(method='post', style='width:400px; margin: 0 auto;')
+      h1= skill ? 'Edit skill' : 'Add Skill'
+      .required-field-block
+        if (!skill.id)
+          input.form-control(type='text' placeholder='id' required name="id")
+          .required-icon
+            .text *
+      .required-field-block
+        input.form-control(type='text' value=skill.title placeholder='name' required name="title")
+        .required-icon
+          .text *
+        br  
+      button.btn.btn-primary(type='submit')= skill.id ? 'Save' : 'Add'
+      span &nbsp;&nbsp;      
+      if (skill.id)
+        a.btn.btn-danger(href=`/admin/skills/${skill.id}/delete`) Delete
+      

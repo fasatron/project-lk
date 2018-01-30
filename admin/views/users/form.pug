@@ -1,0 +1,29 @@
+extends /_layout
+
+
+block content
+  form.edit-form(method='post')
+    .form-group
+      img(src=user.avatar class='avatar' alt="Avatar")  
+    .form-group
+      label(for='email-field') Email
+      input#email-field.form-control(type='email' name='email' placeholder='name@example.com' value=user.email)
+    .form-group
+      label(for='first-name-field') First Name
+      input#first-name-field.form-control(type='text' name='first_name' placeholder='John' value=user.first_name)    
+    .form-group
+      label(for='last-name-field') Last Name
+      input#last-name-field.form-control(type='text' name='last_name' placeholder='Doe' value=user.last_name)    
+    .form-group
+      label(for='about-field') About
+      textarea#about-field.form-control(rows='10' name='about')= user.about
+    .form-group
+      label(for='skills-field') Skills
+      select#skills-field.form-control(multiple name='skills')
+        for skill in skills
+          option(value=skill.id selected=user.skills.find(userSkill => userSkill.id === skill.id))= skill.title
+    button.btn.btn-primary(type='submit') Save
+    span &nbsp;&nbsp;
+    a.btn.btn-danger(href=`/admin/users/${user.id}/delete`) Delete
+    .form-group
+      input#rating-field(type="number" name="rating" min=0 max=5 value=user.rating)
