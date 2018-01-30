@@ -1,0 +1,18 @@
+header
+  nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar-main')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      #navbar-main.collapse.navbar-collapse
+        ul.nav.navbar-nav.pull-right
+          li
+            a(href='/admin') Dashboard
+          li
+            a(href='/users') Mentors
+          li
+            a(href='/auth/login') Log In
+          li
+            a(href='/auth/register') Register

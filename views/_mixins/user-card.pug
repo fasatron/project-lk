@@ -1,17 +1,17 @@
 mixin user-card(user)
   .mentor
-    .row-fluid.mentor-item-row
+    .row.mentor-item-row
       .col-xs-3.text-center.mentor-info
         div
-          img.img-circle.headImg(alt='Avatar' src=user.avatarUrl)
+          img.img-circle.headImg(alt='Avatar' src=user.avatar)
         .rate
           strong= `$ ${user.rate}`
           small / hour
           br
-          a.btn.btn-success.messageBtn(href=user.profile_url) View Profile       
+          a.btn.btn-success.messageBtn(href="#aboutModal" data-toggle="modal" data-target="#myModal") View Profile       
       .col-xs-9.mentor-details
-        a.name(href=user.profile_url)= user.full_name
-        span.ratingNum= user.rating
+        a.name(href="#aboutModal" data-toggle="modal" data-target="#myModal")= user.full_name
+        span &nbsp;&nbsp;        
         .rating
           - for (let x = 0; x < user.rating; x++)
               span  ★
@@ -19,5 +19,32 @@ mixin user-card(user)
         .expertise
           for skill in user.skills
             .badge.customizeBadge
-              a.removeDec(href=`/skills?id=${skill.id}`)= skill.title
-            span &nbsp;
+              a.removeDec(href=`/users?skill=${skill.id}`)= skill.title
+            span &nbsp;&nbsp;
+
+    #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true')
+            h4#myModalLabel.modal-title More about #{user.full_name}
+          .modal-body
+            .text-center
+              img.img-circle(src=user.avatar width='140', height='140', border='0')
+              .text-left Skills: 
+            .expertise
+              for skill in user.skills
+                .badge.customizeBadge
+                  span.removeDec= skill.title
+                span &nbsp;&nbsp;
+            br
+            br
+            .text-center
+              p.text-left
+                strong Bio
+                div= user.about
+              p.text-left
+                strong Email:
+                span &nbsp;&nbsp;
+                span= user.email                
+

@@ -1,49 +1,53 @@
 extends ../_layout
 
 block content
+
   .container
-    .row.main
-        .panel-heading
-        .panel-title.text-center
-            h1.title  Registration
-            hr
-        .main-login.main-center
-        form.form-horizontal(method='post', action='#')
-            .form-group
-            label.cols-sm-2.control-label(for='name') Name
-            .cols-sm-10
-                .input-group
-                span.input-group-addon
-                    i.fa.fa-user.fa(aria-hidden='true')
-                input#name.form-control(type='text', name='name', placeholder='Enter your Name')
-            .form-group
-            label.cols-sm-2.control-label(for='email') Email
-            .cols-sm-10
-                .input-group
-                span.input-group-addon
-                    i.fa.fa-envelope.fa(aria-hidden='true')
-                input#email.form-control(type='text', name='email', placeholder='Enter your Email')
-            .form-group
-            label.cols-sm-2.control-label(for='username') Username
-            .cols-sm-10
-                .input-group
-                span.input-group-addon
-                    i.fa.fa-users.fa(aria-hidden='true')
-                input#username.form-control(type='text', name='username', placeholder='Enter your Username')
-            .form-group
-            label.cols-sm-2.control-label(for='password') Password
-            .cols-sm-10
-                .input-group
-                span.input-group-addon
-                    i.fa.fa-lock.fa-lg(aria-hidden='true')
-                input#password.form-control(type='password', name='password', placeholder='Enter your Password')
-            .form-group
-            label.cols-sm-2.control-label(for='confirm') Confirm Password
-            .cols-sm-10
-                .input-group
-                span.input-group-addon
-                    i.fa.fa-lock.fa-lg(aria-hidden='true')
-                input#confirm.form-control(type='password', name='confirm', placeholder='Confirm your Password')
-            .form-group
-            button.btn.btn-primary.btn-lg.btn-block.login-button(type='button') Register
-            .login-register
+    form.form-horizontal(method='post')
+      fieldset
+        
+        legend.text-center= title
+        
+        .form-group
+          label.col-md-4.control-label(for='first-name-field') First name
+          .col-md-4
+            input#first-name-field.form-control.input-md(name='first_name' type='text' placeholder='John' required)
+        
+        .form-group
+          label.col-md-4.control-label(for='last-name-field') Last name
+          .col-md-4
+            input#last-name-field.form-control.input-md(name='last_name' type='text' placeholder='Smith' required)
+        
+        .form-group
+          label.col-md-4.control-label(for='skills-field') Select skills
+          .col-md-4
+            select#skills-field.form-control(name='skills' multiple)
+              for skill in skills
+                option(value=skill.id)= skill.title
+
+        .form-group
+          label.col-md-4.control-label(for='rate-field') Rate ($ / hour)
+          .col-md-4
+            input#rate-field.form-control.input-md(name='rate' type='number' min=0 placeholder='100' required)
+        
+        .form-group
+          label.col-md-4.control-label(for='email') E-mail
+          .col-md-4
+            input#email.form-control.input-md(name='email' type='text' placeholder='john.smith@mail.com' required='')
+        
+        .form-group
+          label.col-md-4.control-label(for='passwordinput') Password
+          .col-md-4
+            input#passwordinput.form-control.input-md(name='passwordinput' type='password' placeholder='Enter your password' required='')
+        
+        .form-group
+          label.col-md-4.control-label(for='passwordinput') Repeat password 
+          .col-md-4
+            input#passwordinput.form-control.input-md(name='passwordinput' type='password' placeholder='Repeat your password' required='')
+        
+        .form-group
+          label.col-md-4.control-label(for='register-btn')         
+          .col-md-4
+              button#register-btn.btn.btn-primary(type='submit') Register
+
+
