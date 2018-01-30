@@ -1,9 +1,9 @@
 module.exports = {
-    // GET /
-    showMain(req, res) {
-        res.render('index', {
-            id: 'main',
-            title: 'Main'
-        });
-    }
+  // GET /
+  showMain(req, res) {
+    res.render('index', {
+      id: 'main',
+      title: 'Main Page',
+    });
+  },
 };

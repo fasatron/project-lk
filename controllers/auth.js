@@ -1,33 +1,38 @@
+const { Skill } = require('../models');
+
 module.exports = {
-    // GET /auth/register
-    showRegisterPage(req, res) {
-        res.render('auth/register', {
-            id: 'register',
-            className: 'auth-page',
-            title: 'Registration'
-        });
-    },
+  // GET /auth/register
+  showRegisterPage(req, res) {
+    Skill.find().then(data => {
+      const skills = data || [];
 
-    // POST /auth/register
-    register(req, res) {
-        // TODO: Register user
-    },
+      res.render('auth/register', {
+        id: 'register',
+        title: 'Registration',
+        skills,
+      });
+    });
+  },
 
-    // GET /auth/login
-    showLoginPage(req, res) {
-        res.render('auth/login', {
-            id: 'login',
-            className: 'auth-page',
-            title: 'Log in'
-        });
-    },
+  // POST /auth/register
+  register(req, res) {
+    // TODO: Register user
+  },
 
-    // POST /auth/login
-    login(req, res) {
-        // TODO: Log user in
-    },
+  // GET /auth/login
+  showLoginPage(req, res) {
+    res.render('auth/login', {
+      id: 'login',
+      title: 'Log in',
+    });
+  },
 
-    logout(req, res) {
-        // TODO: Log user out
-    }
+  // POST /auth/login
+  login(req, res) {
+    // TODO: Log user in
+  },
+
+  logout(req, res) {
+    // TODO: Log user out
+  },
 };
