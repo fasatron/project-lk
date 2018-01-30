@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const rename = require('gulp-rename');
+const cleanCSS = require('gulp-clean-css');
 
 const paths = {
     vendor: './node_modules/',
@@ -17,7 +18,8 @@ gulp.task('sass', () => {
         .pipe(autoprefixer({
             browsers: ['last 2 versions', 'ie >= 9']
         }))
-        .pipe(rename('app.css'))
+        .pipe(cleanCSS())
+        .pipe(rename('app.min.css'))
         .pipe(gulp.dest(paths.dist));
 });
 
