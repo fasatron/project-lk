@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
+    "connect-mongodb-session": "^1.4.0",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "express-robots": "^0.1.6",
+    "express-session": "^1.15.6",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-clean-css": "^3.9.2",
