@@ -26,24 +26,29 @@ block content
                 option(value=skill.id)= skill.title
 
         .form-group
+          label.col-md-4.control-label(for='about-field') About
+          .col-md-4
+            textarea(rows='10')#about-field(name='about')
+
+        .form-group
           label.col-md-4.control-label(for='rate-field') Rate ($ / hour)
           .col-md-4
-            input#rate-field.form-control.input-md(name='rate' type='number' min=0 placeholder='100' required)
+            input#rate-field.form-control.input-md(name='rate' type='number' min=0 placeholder='100')
         
         .form-group
           label.col-md-4.control-label(for='email') E-mail
           .col-md-4
-            input#email.form-control.input-md(name='email' type='text' placeholder='john.smith@mail.com' required='')
+            input#email.form-control.input-md(name='email' type='text' placeholder='john.smith@mail.com' required)
         
         .form-group
           label.col-md-4.control-label(for='passwordinput') Password
           .col-md-4
-            input#passwordinput.form-control.input-md(name='passwordinput' type='password' placeholder='Enter your password' required='')
+            input#passwordinput.form-control.input-md(name='password' type='password' placeholder='Enter your password' required)
         
         .form-group
-          label.col-md-4.control-label(for='passwordinput') Repeat password 
+          label.col-md-4.control-label(for='confirmPassword') Repeat password 
           .col-md-4
-            input#passwordinput.form-control.input-md(name='passwordinput' type='password' placeholder='Repeat your password' required='')
+            input#confirmPassword.form-control.input-md(name='confirmPassword' type='password' placeholder='Repeat your password' required)
         
         .form-group
           label.col-md-4.control-label(for='register-btn')         

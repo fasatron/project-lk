@@ -8,11 +8,13 @@ header
           span.icon-bar
       #navbar-main.collapse.navbar-collapse
         ul.nav.navbar-nav.pull-right
-          li
-            a(href='/admin') Dashboard
-          li
-            a(href='/users') Mentors
-          li
-            a(href='/auth/login') Log In
-          li
-            a(href='/auth/register') Register
+          li: a(href='/admin') Dashboard
+          li: a(href='/users') Mentors
+          unless User  
+            li: a(href='/auth/login') Log In
+            li: a(href='/auth/register') Register
+          else
+            li: a(href='/profile') Profile
+            li: a(href='/auth/logout') Log Out            
+
+
