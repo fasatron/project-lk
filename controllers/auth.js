@@ -1,4 +1,4 @@
-const { Skill } = require('../models');
+const { Skill, User } = require('../models');
 
 module.exports = {
   // GET /auth/register
@@ -15,8 +15,15 @@ module.exports = {
   },
 
   // POST /auth/register
-  register(req, res) {
-    // TODO: Register user
+  register(req, res, next) {
+    const { email, password, confirmPassword } = req.body;
+
+    User.create(req.body)
+      .then(user => {
+        req.session.userId = user.id;
+        res.redirect('/profile');
+      })
+      .catch(next);
   },
 
   // GET /auth/login
@@ -28,11 +35,27 @@ module.exports = {
   },
 
   // POST /auth/login
-  login(req, res) {
-    // TODO: Log user in
+  login(req, res, next) {
+    const { email, password } = req.body;
+
+    User.authenticate(email, password)
+      .then(user => {
+        req.session.userId = user.id;
+        res.redirect('/profile');
+      })
+      .catch(next);
   },
 
-  logout(req, res) {
-    // TODO: Log user out
+  // GET /auth/logout
+  logout(req, res, next) {
+    if (req.session) {
+      req.session.destroy(error => {
+        if (error) return next(error);
+
+        res.redirect('/');
+      });
+    } else {
+      next();
+    }
   },
 };
