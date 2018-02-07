@@ -12,10 +12,10 @@ const options = {
 passport.use(
   'local-register',
   new LocalStrategy(options, (req, email, password, done) => {
-    if (password !== req.confirmPassword)
+    if (password !== req.body.confirmPassword)
       return done(new Error('Passwords do not match'));
 
-    User.create({ email, password })
+    User.create(req.body)
       .then(user => done(null, user))
       .catch(done);
   }),
@@ -32,7 +32,7 @@ passport.use(
           .isCorrectPassword(password)
           .then(isEqual => {
             if (!isEqual) return done(null, false);
-
+            
             done(null, user);
           })
           .catch(done);
