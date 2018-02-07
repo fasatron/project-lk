@@ -18,7 +18,9 @@ module.exports = {
   },
 
   vk: {
-    authenticate: passport.authenticate('vkontakte', { scope: ['email', 'friends'] }),
+    authenticate: passport.authenticate('vkontakte', {
+      scope: ['email'],
+    }),
     callback: passport.authenticate('vkontakte', {
       failureRedirect: '/auth/login',
       successRedirect: '/profile',
