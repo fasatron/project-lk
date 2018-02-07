@@ -55,6 +55,10 @@ userSchema.post('save', function(error, user, next) {
   }
 });
 
+userSchema.methods.isCorrectPassword = function(password) {
+  return bcrypt.compare(password, this.password);
+};
+
 userSchema.statics.authenticate = function(email, password) {
   return this.findOne({ email }).then(user => {
     if (!user) {
