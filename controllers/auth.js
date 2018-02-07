@@ -1,4 +1,5 @@
-const { Skill, User } = require('../models');
+const { Skill } = require('../models');
+const { passport } = require('../services');
 
 module.exports = {
   // GET /auth/register
@@ -14,18 +15,6 @@ module.exports = {
     });
   },
 
-  // POST /auth/register
-  register(req, res, next) {
-    const { email, password, confirmPassword } = req.body;
-
-    User.create(req.body)
-      .then(user => {
-        req.session.userId = user.id;
-        res.redirect('/profile');
-      })
-      .catch(next);
-  },
-
   // GET /auth/login
   showLoginPage(req, res) {
     res.render('auth/login', {
@@ -34,17 +23,17 @@ module.exports = {
     });
   },
 
-  // POST /auth/login
-  login(req, res, next) {
-    const { email, password } = req.body;
+  // POST /auth/register
+  register: passport.authenticate('local-register', {
+    failureRedirect: '/auth/register',
+    successRedirect: '/profile',
+  }),
 
-    User.authenticate(email, password)
-      .then(user => {
-        req.session.userId = user.id;
-        res.redirect('/profile');
-      })
-      .catch(next);
-  },
+  // POST /auth/login
+  login: passport.authenticate('local-login', {
+    failureRedirect: '/auth/login',
+    successRedirect: '/profile',
+  }),
 
   // GET /auth/logout
   logout(req, res, next) {
