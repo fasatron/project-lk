@@ -8,11 +8,14 @@ const {
     validationResult,
     errorFormatter,
   },
-} = require('../services/validation');
+} = require('../services');
 
 const {
   auth: { showRegisterPage, showLoginPage, login, register, logout },
+  oauth: { github, facebook, vk },
 } = require('../controllers');
+
+
 const {
   auth: { authenticated, unauthenticated },
   validation: { validate },
@@ -29,6 +32,19 @@ router
   .all(unauthenticated)
   .get(showLoginPage)
   .post([email, password], validate, login);
+
+
+// Github
+router.get('/github', github.authenticate);
+router.get('/github/callback', github.callback);
+
+// Facebook
+router.get('/facebook', facebook.authenticate);
+router.get('/facebook/callback', facebook.callback);
+
+// Facebook
+router.get('/vk', vk.authenticate);
+router.get('/vk/callback', vk.callback);
 
 router.get('/logout', authenticated, logout);
 
