@@ -10,11 +10,11 @@ header
         ul.nav.navbar-nav.pull-right
           li: a(href='/admin') Dashboard
           li: a(href='/users') Mentors
-          unless User  
+          unless user  
             li: a(href='/auth/login') Log In
             li: a(href='/auth/register') Register
           else
-            li: a(href='/profile')= User.email
+            li: a(href='/profile')= user.email
             li: a(href='/auth/logout') Log Out            
 
 
