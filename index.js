@@ -6,7 +6,7 @@ const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 
-const db = require('./services/db');
+const { db, passport } = require('./services');
 const admin = require('./admin');
 const routers = require('./routers');
 const { error, auth } = require('./middleware');
@@ -42,6 +42,10 @@ server.use(
     }),
   }),
 );
+
+server.use(passport.initialize());
+server.use(passport.session());
+
 server.use(logger('dev'));
 server.use(auth.findUser);
 
