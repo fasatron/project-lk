@@ -1,6 +1,6 @@
 const { body } = require('express-validator/check');
 
-const validation = {
+module.exports = {
   email: body('email')
     .isEmail()
     .withMessage('incorrect email')
@@ -20,8 +20,4 @@ const validation = {
     .withMessage(
       'confirm password field must have the same value as the password field',
     ),
-};
-
-module.exports = {
-  validation,
 };
