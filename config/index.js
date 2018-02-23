@@ -6,6 +6,7 @@ module.exports = {
   version: '1.0.0',
   port: process.env.PORT || 3000,
   sessionSecret: process.env.SESSION_SECRET,
+  jwtSecret: process.env.JWT_SECRET,
   paths: {
     views: path.resolve(__dirname, '..', 'views'),
     public: path.resolve(__dirname, '..', 'public'),
