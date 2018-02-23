@@ -5,6 +5,7 @@ require('./local');
 require('./github');
 require('./facebook');
 require('./vk');
+require('./jwt')
 
 passport.serializeUser((user, done) => {
     done(null, user._id);

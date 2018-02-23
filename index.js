@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongodb-session')(session);
 
 const { db, passport } = require('./services');
 const admin = require('./admin');
+const api = require('./api');
 const routers = require('./routers');
 const { error, auth } = require('./middleware');
 const config = require('./config');
@@ -24,6 +25,7 @@ server.use(express.static(paths.public));
 server.use(favicon(path.join(paths.public, 'favicon.ico')));
 server.use(robots({ UserAgent: '*', Disallow: '/' }));
 server.use(express.urlencoded({ extended: false }));
+server.use(express.json());
 server.use(
   session({
     name: 'sessionId',
@@ -52,7 +54,7 @@ server.use(auth.findUser);
 server.use('/', routers.main);
 server.use('/auth', routers.auth);
 server.use('/users', routers.user);
-
+server.use('/api', api);
 server.use(auth.authenticated);
 server.use('/profile', routers.profile);
 server.use('/admin', admin);
