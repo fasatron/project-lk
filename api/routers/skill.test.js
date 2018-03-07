@@ -72,18 +72,18 @@ describe('/api', () => {
       });
     });
 
-    // describe('PUT', () => {
-    //   it('should update the skill', () => {
-    //     return request
-    //       .put('/skills/node')
-    //       .set('Content-Type', 'application/json')
-    //       .send({ _id: 'nodejs' })
-    //       .expect(201)
-    //       .then(res => {
-    //         expect(res.body._id).to.equal('nodejs');
-    //       });
-    //   });
-    // });
+    describe('PUT', () => {
+      it('should update the skill', () => {
+        return request
+          .put('/skills/nodejs')
+          .set('Content-Type', 'application/json')
+          .send({ title: 'Nodejs' })
+          .expect(201)
+          .then(res => {
+            expect(res.body.title).to.equal('Nodejs');
+          });
+      });
+    });
 
     describe('DELETE', () => {
       it('should delete the skill', () => {
