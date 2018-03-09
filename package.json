@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon -r dotenv/config index.js",
     "sass": "gulp sass && gulp watch:sass",
     "test": "mocha ./api/**/*.test.js -w"
