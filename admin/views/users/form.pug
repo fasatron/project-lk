@@ -3,6 +3,7 @@ extends /_layout
 
 block content
   form.edit-form(method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
     .form-group
       img(src=user.avatar class='avatar' alt="Avatar")  
     .form-group

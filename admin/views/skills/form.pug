@@ -4,6 +4,7 @@ extends /_layout
 block content
   .container
     form(method='post', style='width:400px; margin: 0 auto;')
+      input(type='hidden' name='_csrf' value=csrfToken)
       h1= skill ? 'Edit skill' : 'Add Skill'
       .required-field-block
         if (!skill.id)

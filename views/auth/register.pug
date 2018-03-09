@@ -4,6 +4,7 @@ block content
 
   .container
     form.form-horizontal(method='post')
+      input(type='hidden' name='_csrf' value=csrfToken)
       fieldset
         
         legend.text-center= title

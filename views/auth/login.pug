@@ -25,6 +25,7 @@ block content
       .row.omb_row-sm-offset-3
         .col-xs-12.col-sm-6
           form.omb_loginForm(method='POST')
+            input(type='hidden' name='_csrf' value=csrfToken)
             .input-group
               span.input-group-addon
                 i.fa.fa-user

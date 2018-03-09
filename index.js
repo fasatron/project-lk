@@ -1,67 +1,18 @@
-const path = require('path');
-const express = require('express');
-const robots = require('express-robots');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const session = require('express-session');
-const MongoStore = require('connect-mongodb-session')(session);
+const server = require('./server');
+const port = server.get('port');
 
-const { db, passport } = require('./services');
-const admin = require('./admin');
-const api = require('./api');
-const routers = require('./routers');
-const { error, auth } = require('./middleware');
-const config = require('./config');
+if (server.get('env') === 'development') {
+  const fs = require('fs');
+  const https = require('https');
 
-const { paths, port } = config;
-const server = express();
+  const ssl = {
+    key: fs.readFileSync(__dirname + '/ssl/key.pem'),
+    cert: fs.readFileSync(__dirname + '/ssl/cert.crt'),
+  };
 
-server.set('view engine', 'pug');
-server.set('views', paths.views);
-
-server.locals.basedir = paths.views;
-
-server.use(express.static(paths.public));
-server.use(favicon(path.join(paths.public, 'favicon.ico')));
-server.use(robots({ UserAgent: '*', Disallow: '/' }));
-server.use(express.urlencoded({ extended: false }));
-server.use(express.json());
-server.use(
-  session({
-    name: 'sessionId',
-    secret: config.sessionSecret,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      // secure: true,
-      signed: true,
-      maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
-    },
-    store: new MongoStore({
-      mongooseConnection: db.connection,
-      touchAfter: 60 * 60 * 24, // 1 day
-    }),
-  }),
-);
-
-server.use(passport.initialize());
-server.use(passport.session());
-
-server.use(logger('dev'));
-server.use(auth.findUser);
-
-server.use('/', routers.main);
-server.use('/auth', routers.auth);
-server.use('/users', routers.user);
-server.use('/api', api);
-server.use(auth.authenticated);
-server.use('/profile', routers.profile);
-server.use('/admin', admin);
-
-server.use(error.notFound);
-server.use(
-  server.get('env') === 'development' ? error.development : error.production,
-);
-
-server.listen(port, () => console.info('Server running on port', port));
+  https
+    .createServer(ssl, server)
+    .listen(port, () => console.log('Express:', port));
+} else {
+  server.listen(port, () => console.log('Express:', port));
+}
