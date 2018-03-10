@@ -4,7 +4,7 @@ const config = require('../config');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(config.mongodbUrl);
+mongoose.connect(config.mongodbUri);
 
 mongoose.connection.on(
   'error',

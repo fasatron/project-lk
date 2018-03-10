@@ -12,7 +12,7 @@ module.exports = {
     public: path.resolve(__dirname, '..', 'public'),
     lib: path.resolve(__dirname, '..', 'node_modules'),
   },
-  mongodbUrl: process.env.MONGODB_URL,
+  mongodbUri: process.env.MONGODB_URI,
   oauth: {
     github: {
       clientID: process.env.GITHUB_CLIENT_ID,
