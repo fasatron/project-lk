@@ -49,8 +49,9 @@ server.use(
       maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
     },
     store: new MongoStore({
-      mongooseConnection: db.connection,
-      touchAfter: 60 * 60 * 24, // 1 day
+      uri: config.mongodbUri,
+      databaseName: 'codementor',
+      collection: 'mySessions'
     }),
   })
 );
