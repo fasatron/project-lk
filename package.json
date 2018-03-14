@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "build",
+    "postinstall": "gulp build",
     "dev": "nodemon -r dotenv/config index.js",
-    "build": "gulp build",
+    "build": "gulp build && gulp watch",
     "test": "mocha ./api/**/*.test.js -w"
   },
   "keywords": [],
