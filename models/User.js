@@ -18,21 +18,17 @@ const userSchema = new Schema(
       ],
     },
     password: { type: String, required: true, min: 7 },
-    image: { data: Buffer, contentType: String },
-    avatar: {
-      type: String,
-      default: 'http://armanpalace.ru/css/images/noava.svg',
-    },
+    avatar_url: { type: String },
     about: { type: String, default: '', trim: true },
-    rating: { type: Number, min: 0, max: 5, default: 0 },
     rate: { type: Number, min: 0, default: 0 },
     skills: [{ type: String, ref: 'Skill' }],
+    role: { type: String, default: 'mentor' },
   },
   {
     toObject: { getters: false, virtuals: false },
     toJSON: { versionKey: false, getters: true },
     timestamps: true,
-  },
+  }
 );
 
 userSchema.pre('save', function(next) {
@@ -83,6 +79,25 @@ userSchema.statics.authenticate = function(email, password) {
 
 userSchema.virtual('full_name').get(function() {
   return `${this.first_name} ${this.last_name}`;
+});
+
+userSchema.virtual('isMentor').get(function() {
+  return this.role === 'mentor';
+});
+
+userSchema.virtual('isAdmin').get(function() {
+  return this.role === 'admin';
+});
+
+userSchema.virtual('avatar').get(function() {
+  if (!this.avatar_url) return 'http://armanpalace.ru/css/images/noava.svg';
+
+  const originalImageUrl = this.avatar_url;
+  const splitUrl = originalImageUrl.split('/upload/');
+  const src =
+    splitUrl[0] + '/upload/w_100,h_100,c_crop,g_face,r_max/' + splitUrl[1];
+
+  return src;
 });
 
 module.exports = mongoose.model('User', userSchema);
