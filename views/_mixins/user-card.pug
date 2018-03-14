@@ -3,19 +3,16 @@ mixin user-card(user)
     .row.mentor-item-row
       .col-xs-3.text-center.mentor-info
         div
-          img.img-circle.headImg(alt='Avatar' src=user.avatar)
+          img(src=user.avatar width='100' height='100' alt='Avatar')
         .rate
           strong= `$ ${user.rate}`
-          small / hour
+          small &nbsp;/ hour
           br
           a.btn.btn-success.messageBtn(href=`#modal-${user.id}` data-toggle="modal" data-target=`#modal-${user.id}`) View Profile       
       .col-xs-9.mentor-details
         a.name(href=`#modal-${user.id}` data-toggle="modal" data-target=`#modal-${user.id}`)= user.full_name
-        span &nbsp;&nbsp;        
-        .rating
-          - for (let x = 0; x < user.rating; x++)
-              span  ★
-        .about= user.about
+        span &nbsp;&nbsp;
+        .about= user.about.length > 100 ? user.about.slice(0, 99) + '...' : user.about
         .expertise
           for skill in user.skills
             .badge.customizeBadge
@@ -30,7 +27,7 @@ mixin user-card(user)
             h4#myModalLabel.modal-title More about #{user.full_name}
           .modal-body
             .text-center
-              img.img-circle(src=user.avatar width='140', height='140', border='0')
+              img.img-circle(src=user.avatar width='100', height='100')
               .text-left Skills: 
             .expertise
               for skill in user.skills
@@ -42,7 +39,8 @@ mixin user-card(user)
             .text-center
               p.text-left
                 strong Bio
-                div= user.about
+                br
+                span= user.about
               p.text-left
                 strong Email:
                 span &nbsp;&nbsp;

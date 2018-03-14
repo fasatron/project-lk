@@ -2,3 +2,26 @@ body {
   font-size: 14px;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.edit-form {
+  width: 300px;
+  padding: 15px;
+  margin: 15px auto;
+  border: 1px solid #ccc;
+
+  .avatar {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+  }
+}
+
+.delete-form {
+  width: 300px;
+  margin: 100px auto;
+}
+
+.progress_bar {
+  width: 100%;
+}

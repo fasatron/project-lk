@@ -3,7 +3,7 @@ extends /_layout
 block content
     form(method='post' class='delete-form')
         input(type='hidden' name='_csrf' value=csrfToken)
-        p Delete user "#{user.full_name}" ?
+        p Delete user "#{mentor.full_name}" ?
         a.btn.btn-primary(href='/admin/users') Cancel
         span &nbsp;&nbsp;        
         button.btn.btn-danger(type='submit') Delete

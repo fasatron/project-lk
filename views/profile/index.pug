@@ -1,5 +1,38 @@
 extends /_layout
 
+
 block content
-  h1= title
-  div= user
+  form.edit-form(method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    .form-group
+      .preview.text-center
+        img(class='avatar' src=user.avatar width='100' height='100' alt="Avatar")
+    .form-group
+        input.avatar-url(type='hidden' name="avatar_url")
+        input.cloudinary-fileupload(name='file', type='file', accept='image/*' data-cloudinary-field='image_id', data-form-data='{"upload_preset": "nltzghfd"}')
+        progress.progress_bar(max='100' value='0' hidden)
+    .form-group
+      label(for='email-field') Email
+      input#email-field.form-control(type='email' name='email' placeholder='name@example.com' value=user.email)
+    .form-group
+      label(for='first-name-field') First Name
+      input#first-name-field.form-control(type='text' name='first_name' placeholder='John' value=user.first_name)    
+    .form-group
+      label(for='last-name-field') Last Name
+      input#last-name-field.form-control(type='text' name='last_name' placeholder='Doe' value=user.last_name)    
+    if user.isMentor
+      .form-group
+        label(for='about-field') About
+        textarea#about-field.form-control(rows='10' name='about')= user.about
+      .form-group
+        label(for='skills-field') Skills
+        select#skills-field.form-control(multiple name='skills' size='20')
+          for skill in skills
+            option(value=skill.id selected=user.skills.find(userSkill => userSkill === skill.id))= skill.title
+      .form-group
+        label(for='rate-field') Rate
+        input#rate-field.form-control(type="number" name="rate" min=0 value=user.rate)      
+    span &nbsp;&nbsp; 
+    button.btn.btn-primary(type='submit') Save    
+    span &nbsp;&nbsp;          
+    a.btn.btn-danger(href=`/profile/delete`) Delete

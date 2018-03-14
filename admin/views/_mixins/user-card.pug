@@ -3,10 +3,10 @@ mixin user-card(user)
     .row.mentor-item-row
       .col-xs-3.text-center.mentor-info
         div
-          img.img-circle.headImg(alt='Avatar' src=user.avatar)
+          img(src=user.avatar width='100' height='100' alt='Avatar')
         .rate
           strong= `$ ${user.rate}`
-          small / hour
+          small &nbsp;/ hour
           br
           a.btn.btn-success.messageBtn(href=`/admin/users/${user.id}/update`) Edit Profile       
       .col-xs-9.mentor-details
@@ -15,4 +15,4 @@ mixin user-card(user)
         .rating
           - for (let x = 0; x < user.rating; x++)
               span  ★
-        .about= user.about
+        div Role: #{user.role}

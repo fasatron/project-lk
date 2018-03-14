@@ -20,9 +20,16 @@ block content
             input#last-name-field.form-control.input-md(name='last_name' type='text' placeholder='Smith' required)
         
         .form-group
+          label.col-md-4.control-label(for='first-name-field') Avatar
+          .col-md-4
+            .preview.text-center
+            input.avatar-url(type='hidden' name="avatar_url")
+            input.cloudinary-fileupload(name='file', type='file', accept='image/*' data-cloudinary-field='image_id', data-form-data='{"upload_preset": "nltzghfd"}')
+            progress.progress_bar(max='100' value='0' hidden)
+        .form-group
           label.col-md-4.control-label(for='skills-field') Select skills
           .col-md-4
-            select#skills-field.form-control(name='skills' multiple)
+            select#skills-field.form-control(name='skills' multiple size='20')
               for skill in skills
                 option(value=skill.id)= skill.title
 
@@ -34,7 +41,7 @@ block content
         .form-group
           label.col-md-4.control-label(for='rate-field') Rate ($ / hour)
           .col-md-4
-            input#rate-field.form-control.input-md(name='rate' type='number' min=0 placeholder='100')
+            input#rate-field.form-control.input-md(name='rate' type='number' min=0 value=0 placeholder='100')
         
         .form-group
           label.col-md-4.control-label(for='email') E-mail
@@ -55,5 +62,4 @@ block content
           label.col-md-4.control-label(for='register-btn')         
           .col-md-4
               button#register-btn.btn.btn-primary(type='submit') Register
-
 

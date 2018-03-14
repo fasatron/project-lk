@@ -1,0 +1,10 @@
+extends /_layout
+
+block content
+    form(method='post' class='delete-form')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        p Are you sure you want to delete your profile?
+        div.text-center
+            a.btn.btn-primary(href='/') Cancel
+            span &nbsp;&nbsp;        
+            button.btn.btn-danger(type='submit') Delete

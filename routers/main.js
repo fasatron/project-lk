@@ -4,6 +4,8 @@ const router = Router();
 
 const { main: { showMain } } = require('../controllers');
 
-router.get('/', showMain);
+router.get('/', (req, res, next) => {
+  res.redirect('/users');
+});
 
 module.exports = router;

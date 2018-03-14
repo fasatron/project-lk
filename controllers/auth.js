@@ -26,13 +26,13 @@ module.exports = {
   // POST /auth/register
   register: passport.authenticate('local-register', {
     failureRedirect: '/auth/register',
-    successRedirect: '/profile',
+    successRedirect: '/users',
   }),
 
   // POST /auth/login
   login: passport.authenticate('local-login', {
     failureRedirect: '/auth/login',
-    successRedirect: '/profile',
+    successRedirect: '/users',
   }),
 
   // GET /auth/logout

@@ -6,6 +6,7 @@ module.exports = {
       .populate('skills')
       .then(data => {
         req.user = data || {};
+        res.locals.mentor = req.user;
 
         next();
       })
@@ -42,12 +43,10 @@ module.exports = {
 
   // GET /admin/users/:user/update
   showUpdatePage(req, res) {
-    const user = req.user || {};
     Skill.find().then(data => {
       const skills = data || [];
 
       res.render('users/form', {
-        user,
         skills,
         title: 'Edit User',
       });
@@ -56,9 +55,7 @@ module.exports = {
 
   // GET /admin/users/:user/delete
   showDeletePage(req, res) {
-    const user = req.user || {};
-
-    res.render('users/delete', { user });
+    res.render('users/delete');
   },
 
   // POST /admin/users/:user/update

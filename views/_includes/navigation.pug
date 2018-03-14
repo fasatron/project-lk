@@ -8,7 +8,8 @@ header
           span.icon-bar
       #navbar-main.collapse.navbar-collapse
         ul.nav.navbar-nav.pull-right
-          li: a(href='/admin') Dashboard
+          if (user && user.isAdmin)
+            li: a(href='/admin') Dashboard
           li: a(href='/users') Mentors
           unless user  
             li: a(href='/auth/login') Log In

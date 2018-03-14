@@ -4,4 +4,5 @@ module.exports = {
   main: require('./main'),
   skill: require('./skill'),
   user: require('./user'),
+  profile: require('./profile'),
 };

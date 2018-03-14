@@ -14,11 +14,12 @@ passport.use(
   new LocalStrategy(options, (req, email, password, done) => {
     if (password !== req.body.confirmPassword)
       return done(new Error('Passwords do not match'));
+    req.body.role = 'mentor';
 
     User.create(req.body)
       .then(user => done(null, user))
       .catch(done);
-  }),
+  })
 );
 
 passport.use(
@@ -32,11 +33,11 @@ passport.use(
           .isCorrectPassword(password)
           .then(isEqual => {
             if (!isEqual) return done(null, false);
-            
+
             done(null, user);
           })
           .catch(done);
       })
       .catch(done);
-  }),
+  })
 );
