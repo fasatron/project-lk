@@ -2,17 +2,18 @@ const path = require('path');
 const express = require('express');
 const robots = require('express-robots');
 const favicon = require('serve-favicon');
-const logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const helmet = require('helmet');
+const logger = require('morgan');
+const ms = require('ms');
 
 const { db, passport } = require('./services');
 const admin = require('./admin');
 const api = require('./api');
 const routers = require('./routers');
-const { error, auth, csrf } = require('./middleware');
+const { error, auth, csrf, skill } = require('./middleware');
 const config = require('./config');
 
 const { paths, port } = config;
@@ -23,11 +24,15 @@ server.set('views', paths.views);
 server.set('port', config.port);
 
 server.locals.basedir = paths.views;
+server.locals.lib = paths.lib;
+server.locals.config = config;
 
 server.use(
   helmet({
     frameguard: { action: 'deny' },
-    hsts: false,
+    referrerPolicy: true,
+    hsts: true,
+    noCache: true,
   })
 );
 
@@ -44,14 +49,14 @@ server.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      // secure: true,
+      secure: true,
       signed: true,
-      maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days
+      maxAge: ms('3 days'),
     },
     store: new MongoStore({
       uri: config.mongodbUri,
       databaseName: 'codementor',
-      collection: 'mySessions'
+      collection: 'mySessions',
     }),
   })
 );
@@ -61,6 +66,7 @@ server.use(passport.session());
 
 server.use(logger('dev'));
 server.use(auth.findUser);
+server.use(skill.findSkills);
 
 server.use('/api', api);
 
