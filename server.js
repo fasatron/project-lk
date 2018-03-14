@@ -3,6 +3,7 @@ const express = require('express');
 const robots = require('express-robots');
 const favicon = require('serve-favicon');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongodb-session')(session);
 const csurf = require('csurf');
 const helmet = require('helmet');
@@ -39,6 +40,7 @@ server.use(
 server.use(express.static(paths.public));
 server.use(favicon(path.join(paths.public, 'favicon.ico')));
 server.use(robots({ UserAgent: '*', Disallow: '/' }));
+server.use(cookieParser());
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 server.use(
@@ -70,7 +72,7 @@ server.use(skill.findSkills);
 
 server.use('/api', api);
 
-server.use(csurf(), csrf);
+server.use(csurf({ cookie: true }), csrf);
 server.use('/', routers.main);
 server.use('/auth', routers.auth);
 server.use('/mentors', routers.mentor);
