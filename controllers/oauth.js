@@ -5,7 +5,7 @@ module.exports = {
     authenticate: passport.authenticate('github'),
     callback: passport.authenticate('github', {
       failureRedirect: '/auth/login',
-      successRedirect: '/users',
+      successRedirect: '/mentors',
     }),
   },
 
@@ -13,7 +13,7 @@ module.exports = {
     authenticate: passport.authenticate('facebook', { scope: ['email'] }),
     callback: passport.authenticate('facebook', {
       failureRedirect: '/auth/login',
-      successRedirect: '/users',
+      successRedirect: '/mentors',
     }),
   },
 
@@ -23,7 +23,7 @@ module.exports = {
     }),
     callback: passport.authenticate('vkontakte', {
       failureRedirect: '/auth/login',
-      successRedirect: '/users',
+      successRedirect: '/mentors',
     }),
   },
 };

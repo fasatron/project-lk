@@ -1,7 +1,7 @@
 aside.col-xs-6.col-sm-3
   ul.list-group
     li.list-group-item
-      a(href=`/users`) All
+      a(href=`/mentors`) All
     for skill in skills
       li.list-group-item
-        a(href=`/users?skill=${skill.id}`)= skill.title
+        a(href=`/mentors?skill=${skill.id}`)= skill.title

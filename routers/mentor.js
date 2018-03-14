@@ -2,15 +2,15 @@ const { Router } = require('express');
 
 const router = Router();
 const {
-  user: { showUsers, showUsersBySkill },
+  mentor: { showMentors, showMentorsBySkill },
   skill: { findSkills },
 } = require('../controllers');
 
 router.get('/', findSkills, (req, res, next) => {
   if (req.query.skill) {
-    showUsersBySkill(req, res, next);
+    showMentorsBySkill(req, res, next);
   } else {
-    showUsers(req, res, next);
+    showMentors(req, res, next);
   }
 });
 

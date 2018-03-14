@@ -5,7 +5,7 @@ const router = Router();
 const { main: { showMain } } = require('../controllers');
 
 router.get('/', (req, res, next) => {
-  res.redirect('/users');
+  res.redirect('/mentors');
 });
 
 module.exports = router;

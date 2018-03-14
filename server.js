@@ -73,7 +73,7 @@ server.use('/api', api);
 server.use(csurf(), csrf);
 server.use('/', routers.main);
 server.use('/auth', routers.auth);
-server.use('/users', routers.user);
+server.use('/mentors', routers.mentor);
 server.use(auth.authenticated);
 server.use('/profile', routers.profile);
 server.use('/admin', admin);

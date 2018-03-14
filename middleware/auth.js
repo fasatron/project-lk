@@ -16,6 +16,6 @@ module.exports = {
   unauthenticated(req, res, next) {
     if (!req.user) return next();
 
-    res.redirect('/users');
+    res.redirect('/mentors');
   },
 };

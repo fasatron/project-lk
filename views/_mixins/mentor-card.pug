@@ -1,0 +1,48 @@
+mixin mentor-card(mentor)
+  .mentor
+    .row.mentor-item-row
+      .col-xs-3.text-center.mentor-info
+        div
+          img(src=mentor.avatar width='100' height='100' alt='Avatar')
+        .rate
+          strong= `$ ${mentor.rate}`
+          small &nbsp;/ hour
+          br
+          a.btn.btn-success.messageBtn(href=`#modal-${mentor.id}` data-toggle="modal" data-target=`#modal-${mentor.id}`) View Profile       
+      .col-xs-9.mentor-details
+        a.name(href=`#modal-${mentor.id}` data-toggle="modal" data-target=`#modal-${mentor.id}`)= mentor.full_name
+        span &nbsp;&nbsp;
+        .about= mentor.about.length > 100 ? mentor.about.slice(0, 99) + '...' : mentor.about
+        .expertise
+          for skill in mentor.skills
+            .badge.customizeBadge
+              a.removeDec(href=`/mentors?skill=${skill.id}`)= skill.title
+            span &nbsp;&nbsp;
+
+    .modal.fade(id=`modal-${mentor.id}` tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal', aria-hidden='true')
+            h4#myModalLabel.modal-title More about #{mentor.full_name}
+          .modal-body
+            .text-center
+              img.img-circle(src=mentor.avatar width='100', height='100')
+              .text-left Skills: 
+            .expertise
+              for skill in mentor.skills
+                .badge.customizeBadge
+                  span.removeDec= skill.title
+                span &nbsp;&nbsp;
+            br
+            br
+            .text-center
+              p.text-left
+                strong Bio
+                br
+                span= mentor.about
+              p.text-left
+                strong Email:
+                span &nbsp;&nbsp;
+                span= mentor.email                
+

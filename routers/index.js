@@ -3,6 +3,6 @@ module.exports = {
   main: require('./main'),
   profile: require('./profile'),
   skill: require('./skill'),
-  user: require('./user'),
+  mentor: require('./mentor'),
   profile: require('./profile'),
 };

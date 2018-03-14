@@ -1,6 +1,6 @@
 extends ../_layout
 
-include ../_mixins/user-card
+include ../_mixins/mentor-card
 
 block content
   .container
@@ -11,9 +11,9 @@ block content
         .panel-heading
             h3.panel-title= title
         .panel-body
-          if users.length
+          if mentors.length
             .col-xs-12.col-md-9
-              for user in users
-                +user-card(user)
+              for mentor in mentors
+                +mentor-card(mentor)
           else
             p No results found   

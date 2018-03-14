@@ -3,6 +3,6 @@ module.exports = {
   oauth: require('./oauth'),
   main: require('./main'),
   skill: require('./skill'),
-  user: require('./user'),
+  mentor: require('./mentor'),
   profile: require('./profile'),
 };

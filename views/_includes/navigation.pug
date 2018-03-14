@@ -10,12 +10,12 @@ header
         ul.nav.navbar-nav.pull-right
           if (user && user.isAdmin)
             li: a(href='/admin') Dashboard
-          li: a(href='/users') Mentors
+          li: a(href='/mentors') Mentors
           unless user  
-            li: a(href='/auth/login') Log In
+            li: a(href='/auth/login') Log in
             li: a(href='/auth/register') Register
           else
             li: a(href='/profile')= user.email
-            li: a(href='/auth/logout') Log Out            
+            li: a(href='/auth/logout') Log out            
 
 
