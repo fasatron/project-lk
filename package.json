@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "gulp sass",
+    "postinstall": "build",
     "dev": "nodemon -r dotenv/config index.js",
     "build": "gulp build",
     "test": "mocha ./api/**/*.test.js -w"
