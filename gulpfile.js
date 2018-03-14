@@ -5,13 +5,14 @@ const rename = require('gulp-rename');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
+const del = require('del');
 
 const paths = {
-  css: {
+  styles: {
     src: './styles',
     dist: './public/css',
   },
-  js: {
+  scripts: {
     src: [
       './node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js',
       './node_modules/blueimp-file-upload/js/jquery.iframe-transport.js',
@@ -23,9 +24,18 @@ const paths = {
   },
 };
 
-gulp.task('sass', () => {
-  gulp
-    .src(`${paths.css.src}/index.scss`)
+function scripts() {
+  return gulp
+    .src(paths.scripts.src)
+    .pipe(concat('app.js'))
+    .pipe(uglify())
+    .pipe(rename('app.min.js'))
+    .pipe(gulp.dest(paths.scripts.dist));
+}
+
+function styles() {
+  return gulp
+    .src(`${paths.styles.src}/index.scss`)
     .pipe(
       sass({
         includePaths: ['./node_modules/'],
@@ -38,19 +48,22 @@ gulp.task('sass', () => {
     )
     .pipe(cleanCSS())
     .pipe(rename('app.min.css'))
-    .pipe(gulp.dest(paths.css.dist));
-});
+    .pipe(gulp.dest(paths.styles.dist));
+}
 
-gulp.task('scripts', () => {
-  gulp
-    .src(paths.js.src)
-    .pipe(concat('app.js'))
-    .pipe(uglify())
-    .pipe(rename('app.min.js'))
-    .pipe(gulp.dest(paths.js.dist));
-});
+function watch() {
+  gulp.watch(paths.styles.src + '/**/*.scss', styles);
+  gulp.watch('./scripts/index.js', scripts);
+}
 
-gulp.task('watch:sass', () =>
-  gulp.watch(paths.css.src + '/**/*.scss', ['sass'])
-);
-gulp.task('watch:scripts', () => gulp.watch('./scripts/index.js', ['scripts']));
+gulp.task('styles', styles);
+gulp.task('scripts', scripts);
+
+function clean() {
+  return del([paths.styles.dist, paths.scripts.dist]);
+}
+
+const build = gulp.series(clean, gulp.parallel(styles, scripts));
+
+gulp.task('build', build);
+gulp.task('default', build);
